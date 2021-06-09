@@ -72,7 +72,7 @@ def StatusProcess(request, code):
                 }
             
                 return Response(resp, status= status.HTTP_202_ACCEPTED)
-            else:
+            elif res.status == 'SUCCESS':
                 accounts = [x['accounts_data'] for x in res.result]
                 customer = [x['customer_data'] for x in res.result]
                 statements = [x['statements_data'] for x in res.result]
@@ -99,6 +99,8 @@ def StatusProcess(request, code):
                 con.close()
             
                 return Response(resp)
+            else:
+                return Response({'status': res.status})
         else:
             return Response({'code': "%s don't exists" % code}, status= status.HTTP_400_BAD_REQUEST)
 

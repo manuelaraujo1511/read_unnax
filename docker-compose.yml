@@ -8,3 +8,16 @@ services:
       - .:/code
     ports:
       - "8000:8000"
+      
+  mongodb:
+    image : mongo
+    container_name: mongodb
+    environment:
+      - PUID=1000
+      - PGID=1000
+      MONGO_INITDB_DATABASE: unnax_read
+    volumes:
+      - .:/data/db
+    ports:
+      - 27017:27017
+    restart: unless-stopped
