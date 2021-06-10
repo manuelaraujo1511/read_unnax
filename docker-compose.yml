@@ -8,7 +8,7 @@ services:
       - 8000:8000
     volumes:
       - .:/code
-    depend_on:
+    depends_on:
       - mongodb
     networks:
       - sail   
