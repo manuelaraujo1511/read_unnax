@@ -15,13 +15,11 @@ services:
 
   mongodb:
     image : mongo
-    container_name: mongodb
-    env_file:
-      - .env
+    container_name: mongodb    
     environment:
       PUID: 1000
       PGID: 1000
-      MONGO_INITDB_DATABASE: ${MONGODB_DEFAULT_DB}
+      MONGO_INITDB_DATABASE: unnax_read_dk
     volumes:
       - mongodbvol:/data/db
     ports:
