@@ -1,4 +1,4 @@
-version: '3'
+version: '3.2'
 
 services:
   api:
@@ -7,7 +7,7 @@ services:
     volumes:
       - .:/code
     ports:
-      - "8000:8000"
+      - 8000:8000
     depends_on:
       - mongodb
       
@@ -23,24 +23,18 @@ services:
     volumes:
       - .:/data/db
     ports:
-      - "27017:27017"
+      - 27017:27017
     restart: unless-stopped
+
   rabbitmq:
-    image: rabbitmq
-    container_name: rabbitmq
-    env_file:
-      - ./.env
-    environment:        
-      RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER}
-      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASSWORD}
-    
-    volumes:
-      - .:/etc/rabbitmq/
-      - .:/var/lib/rabbitmq/
-      - .:/var/log/rabbitmq/
+    image: rabbitmq:3-management-alpine
+    container_name: 'rabbitmq'
     ports:
       - 5672:5672
       - 15672:15672
+    volumes:
+      - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+      - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
     networks:
       - rabbitmq_go_net
 networks:

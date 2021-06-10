@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-j_6b%6e$n(klukbg5+d3bfj#%15xh&aj9_nf($##5nc7j-c)yf
 DEBUG = True
 
 ALLOWED_HOSTS = ['*', '3.129.247.63']
-
+HOST = '3.129.247.63'
 
 # Application definition
 
@@ -44,9 +44,9 @@ INSTALLED_APPS = [
 
 CELERY_RESULT_BACKEND = 'django-db'
 CELERY_CACHE_BACKEND = 'django-cache'
-# CELERY_BROKER_URL = 'amqp://admin:19200130@ec2-18-116-67-98.us-east-2.compute.amazonaws.com:5672/my_vhost'
-CELERY_BROKER_URL = 'amqp://admin:19200130@3.129.247.63:5672//my_vhost'
-# BROKER_URL = 'amqp://admin:19200130@18.116.67.98:5672/my_vhost'
+# CELERY_BROKER_URL = 'amqp://admin:19200130@3.129.247.63:5672//my_vhost'
+CELERY_BROKER_URL = 'amqp://guest:guest@%s:5672//my_vhost'%HOST
+
 
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
@@ -92,10 +92,10 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     },
-    'mongo_db': {
+    'mongo_db': {        
         'CLIENT': {
-            'host': '0.0.0.0',
-            'port': 27017
+            'host': HOST,
+            'port': 27017,           
         },
     },
 }
