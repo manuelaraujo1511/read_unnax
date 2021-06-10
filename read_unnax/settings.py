@@ -28,7 +28,7 @@ DEBUG = True
 ALLOWED_HOSTS = ['*', '3.129.247.63']
 HOST = '3.129.247.63'
 MONGODB_HOSTS= 'mongodb'
-RABBITMQ_HOSTS= 'rabbitmq'
+RABBITMQ_HOSTS= 'rabbit'
 # in local amdin
 RABBITMQ_USER= 'guest'
 # in local 19200130
