@@ -32,7 +32,7 @@ services:
     restart: unless-stopped
   celery:
     build: .
-    command: celery -A proj worker -l info
+    command: celery -A read_unnax worker -l info
     volumes:
       - .:/code
     depends_on:
@@ -40,7 +40,7 @@ services:
   
   celery-beat:
     build: .
-    command: celery -A proj beat -l info
+    command: celery -A read_unnax beat -l info
     volumes:
       - .:/code
     depends_on:
