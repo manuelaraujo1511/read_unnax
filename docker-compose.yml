@@ -8,6 +8,8 @@ services:
       - .:/code
     ports:
       - "8000:8000"
+    depends_on:
+      - mongodb
       
   mongodb:
     image : mongo
@@ -15,7 +17,7 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      MONGO_INITDB_DATABASE: unnax_read
+      - MONGO_INITDB_DATABASE='unnax_read_dk'
     volumes:
       - .:/data/db
     ports:
