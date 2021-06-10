@@ -45,7 +45,7 @@ INSTALLED_APPS = [
 CELERY_RESULT_BACKEND = 'django-db'
 CELERY_CACHE_BACKEND = 'django-cache'
 # CELERY_BROKER_URL = 'amqp://admin:19200130@3.129.247.63:5672//my_vhost'
-CELERY_BROKER_URL = 'amqp://guest:guest@%s:5672//my_vhost'%HOST
+CELERY_BROKER_URL = 'amqp://admin:19200130@%s:5672//my_vhost'%HOST
 
 
 CELERY_ACCEPT_CONTENT = ['application/json']

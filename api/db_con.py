@@ -14,8 +14,7 @@ class DBConnection(object):
     url_connect = "%s:%s/" % (
       settings.DATABASES['mongo_db']['CLIENT']['host'],
       str(settings.DATABASES['mongo_db']['CLIENT']['port'])
-    )
-    
+    )    
     self.conexion= pymongo.MongoClient("mongodb://%s" % url_connect)
     self.db = self.conexion["unnax_read"]
   
