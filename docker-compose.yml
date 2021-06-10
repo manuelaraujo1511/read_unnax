@@ -29,9 +29,9 @@ services:
     restart: unless-stopped
   
   rabbitmq:
-    command: bash -c "rabbitmqctl add_user admin 19200130 && rabbitmqctl add_vhost /my_vhost && rabbitmqctl set_user_tags admin mytag && rabbitmqctl set_permissions -p /my_vhost admin '.*' '.*' '.*'"
     image: rabbitmq:3-management-alpine
     container_name: rabbitmq
+    command: bash -c "rabbitmqctl add_user admin 19200130 && rabbitmqctl add_vhost /my_vhost && rabbitmqctl set_user_tags admin mytag && rabbitmqctl set_permissions -p /my_vhost admin '.*' '.*' '.*'"    
     ports:
       - 5672:5672
       - 15672:15672
