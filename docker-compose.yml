@@ -11,11 +11,13 @@ services:
     depends_on:
       - mongodb
     networks:
-      - sail   
+      - sail
 
   mongodb:
     image : mongo
-    container_name: mongodb    
+    container_name: mongodb
+    env_file:
+      - .env
     environment:
       PUID: 1000
       PGID: 1000
@@ -26,23 +28,48 @@ services:
       - 27017:27017
     networks:
       - sail
-    restart: unless-stopped 
+    restart: unless-stopped
+  
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: rabbitmq
+    enviromet:
+      RABBITMQ_DEFAULT_USER: "guest"
+      RABBITMQ_DEFAULT_PASS: "guest"
+      RABBITMQ_DEFAULT_VHOST: "/"
+    ports:
+      - 5672:5672
+      - 15672:15672
+    restart: on-failure
+    volumes:
+      - rabbitvol:/var/lib/rabbitmq/
+      - rabbitvol:/var/log/rabbitmq
+    networks:
+      - sail
 
   celery:
     build: .
+    hostname: rabbitmq
     command: celery -A read_unnax worker -l info
     volumes:
       - .:/code
+    networks:
+      - sail
     depends_on:
       - mongodb
+      - rabbitmq
   
   celery-beat:
     build: .
+    hostname: rabbitmq
     command: celery -A read_unnax beat -l info
     volumes:
       - .:/code
+    networks:
+      - sail
     depends_on:
       - mongodb
+      - rabbitmq
 
 networks:
   sail:
@@ -50,4 +77,6 @@ networks:
 
 volumes:
   mongodbvol:
-    driver: local  
+    driver: local
+  rabbitvol:
+    driver: local
