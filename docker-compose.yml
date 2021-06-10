@@ -16,8 +16,6 @@ services:
   mongodb:
     image : mongo
     container_name: mongodb
-    env_file:
-      - .env
     environment:
       PUID: 1000
       PGID: 1000
@@ -33,7 +31,7 @@ services:
   rabbitmq:
     image: rabbitmq:3-management-alpine
     container_name: rabbitmq
-    enviromet:
+    enviroment:
       RABBITMQ_DEFAULT_USER: "guest"
       RABBITMQ_DEFAULT_PASS: "guest"
       RABBITMQ_DEFAULT_VHOST: "/"
