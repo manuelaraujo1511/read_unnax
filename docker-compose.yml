@@ -29,6 +29,7 @@ services:
     restart: unless-stopped
   
   rabbitmq:
+    build: .
     image: rabbitmq:3-management-alpine
     container_name: rabbitmq
     ports:
