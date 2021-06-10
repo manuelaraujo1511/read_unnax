@@ -92,10 +92,10 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     },
-    'mongo_db': {        
+    'mongo_db': {
         'CLIENT': {
-            'host': 'localhost',
-            'port': 27017,           
+            'host': '0.0.0.0',
+            'port': 27017
         },
     },
 }
