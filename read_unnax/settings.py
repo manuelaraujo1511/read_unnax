@@ -28,14 +28,14 @@ DEBUG = True
 ALLOWED_HOSTS = ['*', '3.129.247.63']
 HOST = '3.129.247.63'
 MONGODB_HOSTS= 'mongodb'
-# RABBITMQ_HOSTS= '3.129.247.63'
-RABBITMQ_HOSTS= 'rabbitmq'
+# RABBITMQ_HOSTS= 'rabbitmq'
+RABBITMQ_HOSTS= '3.129.247.63'
 RABBITMQ_USER= 'admin'
 RABBITMQ_PASS= '19200130'
+RABBITMQ_VHOST= '/my_vhost'
 # RABBITMQ_USER= 'guest'
 # RABBITMQ_PASS= 'guest'
 # RABBITMQ_VHOST= '/my_vhost'
-RABBITMQ_VHOST= '/my_vhost'
 # Application definition
 
 INSTALLED_APPS = [
