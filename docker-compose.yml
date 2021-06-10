@@ -10,7 +10,6 @@ services:
       - .:/code
     depends_on:
       - mongodb
-      - rabbit
     networks:
       - sail   
 
