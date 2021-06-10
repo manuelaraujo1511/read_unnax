@@ -1,5 +1,3 @@
-version: '3.2'
-
 services:
   api:
     build: .
@@ -11,11 +9,11 @@ services:
     depends_on:
       - mongodb
     networks:
-      - sail
+      - sail   
 
   mongodb:
     image : mongo
-    container_name: mongodb
+    container_name: mongodb    
     environment:
       PUID: 1000
       PGID: 1000
@@ -26,50 +24,23 @@ services:
       - 27017:27017
     networks:
       - sail
-    restart: unless-stopped
-  
-  rabbitmq:
-    image: rabbitmq:3-management-alpine
-    container_name: rabbitmq
-    command: bash -c "rabbitmqctl add_user admin 19200130 && rabbitmqctl add_vhost /my_vhost && rabbitmqctl set_user_tags admin mytag && rabbitmqctl set_permissions -p /my_vhost admin '.*' '.*' '.*'"    
-    ports:
-      - 5672:5672
-      - 15672:15672
-    expose:
-      - 5672
-      - 15672
-    restart: on-failure
-    volumes:
-      - rabbitvol:/var/lib/rabbitmq/
-      - rabbitvol:/var/log/rabbitmq
-    networks:
-      - sail
+    restart: unless-stopped 
 
   celery:
     build: .
-    hostname: rabbitmq
     command: celery -A read_unnax worker -l info
     volumes:
       - .:/code
-    ports: []
-    networks:
-      - sail
     depends_on:
       - mongodb
-      - rabbitmq
   
   celery-beat:
     build: .
-    hostname: rabbitmq
     command: celery -A read_unnax beat -l info
-    ports: []
     volumes:
       - .:/code
-    networks:
-      - sail
     depends_on:
       - mongodb
-      - rabbitmq
 
 networks:
   sail:
@@ -77,6 +48,4 @@ networks:
 
 volumes:
   mongodbvol:
-    driver: local
-  rabbitvol:
-    driver: local
+    driver: local  
