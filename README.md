@@ -19,4 +19,4 @@
 `python read.py --username <username> --password <password>`
 
 # Ejecucion del API REST
-### Para la ejecuion del api se encuentra un archivo **.yml** que contiene la configuracion de docker-compose mediante el cual se levantaran los diferentes servicios
+### Para la ejecucion del api se encuentra un archivo **.yml** que contiene la configuracion de docker-compose mediante el cual se levantaran los diferentes servicios
