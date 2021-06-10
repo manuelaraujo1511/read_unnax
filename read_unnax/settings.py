@@ -27,7 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*', '3.129.247.63']
 HOST = '3.129.247.63'
-
+MONGODB_HOSTS= 'mongodb'
 # Application definition
 
 INSTALLED_APPS = [
@@ -92,9 +92,10 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     },
-    'mongo_db': {        
+    'mongo_db': {  
+        'DEFAULT_DB': "unnax_read_dk",
         'CLIENT': {
-            'host': HOST,
+            'host': MONGODB_HOSTS,
             'port': 27017,           
         },
     },

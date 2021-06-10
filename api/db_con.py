@@ -16,7 +16,8 @@ class DBConnection(object):
       str(settings.DATABASES['mongo_db']['CLIENT']['port'])
     )    
     self.conexion= pymongo.MongoClient("mongodb://%s" % url_connect)
-    self.db = self.conexion["unnax_read"]
+    # self.db = self.conexion["unnax_read"]
+    self.db = self.conexion[settings.DATABASES['mongo_db']['DEFAULT_DB']]
   
   def get_collection(self, collection):
     self.collect = self.db[collection]

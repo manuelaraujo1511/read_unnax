@@ -4,8 +4,37 @@ services:
   api:
     build: .
     command: python manage.py runserver 0.0.0.0:8000
-    volumes:
-      - .:/code
     ports:
       - 8000:8000
- 
+    volumes:
+      - .:/code
+    depend_on:
+      - mongodb
+    networks:
+      - sail   
+
+  mongodb:
+    image : mongo
+    container_name: mongodb
+    env_file:
+      - .env
+    environment:
+      PUID: 1000
+      PGID: 1000
+      MONGO_INITDB_DATABASE: ${MONGODB_DEFAULT_DB}
+    volumes:
+      - mongodbvol:/data/db
+    ports:
+      - 27017:27017
+    networks:
+      - sail
+
+    restart: unless-stopped
+
+networks:
+  sail:
+    driver: bridge
+
+volumes:
+  mongodbvol:
+    driver: local
