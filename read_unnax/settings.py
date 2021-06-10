@@ -35,7 +35,7 @@ RABBITMQ_PASS= '19200130'
 # RABBITMQ_USER= 'guest'
 # RABBITMQ_PASS= 'guest'
 # RABBITMQ_VHOST= '/my_vhost'
-RABBITMQ_VHOST= '/'
+RABBITMQ_VHOST= '/my_vhost'
 # Application definition
 
 INSTALLED_APPS = [
