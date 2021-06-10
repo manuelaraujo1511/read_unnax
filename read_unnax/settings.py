@@ -94,7 +94,7 @@ DATABASES = {
     },
     'mongo_db': {        
         'CLIENT': {
-            'host': '3.129.247.63',
+            'host': 'localhost',
             'port': 27017,           
         },
     },

@@ -5,7 +5,7 @@ services:
     build: .
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
-      - .:/code
+      - ".:/code"
     ports:
       - "8000:8000"
     depends_on:
@@ -14,12 +14,35 @@ services:
   mongodb:
     image : mongo
     container_name: mongodb
+    env_file:
+      - .env
     environment:
-      - PUID=1000
-      - PGID=1000
-      - MONGO_INITDB_DATABASE='unnax_read_dk'
+      PUID: 1000
+      PGID: 1000
+      MONGO_INITDB_DATABASE: ${MONGODB_DEFAULT_DB}
     volumes:
-      - .:/data/db
+      - ".:/data/db"
     ports:
-      - 27017:27017
+      - "27017:27017"
     restart: unless-stopped
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: rabbitmq
+    env_file:
+      - .env
+    environment:        
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASSWORD}
+    
+      volumes:
+      - ".:/etc/rabbitmq/"
+      - ".:/var/lib/rabbitmq/"
+      - ".:/var/log/rabbitmq/"
+    ports:
+      - 5672:5672
+      - 15672:15672
+    networks:
+      - rabbitmq_go_net
+networks:
+  rabbitmq_go_net:
+    driver: bridge
