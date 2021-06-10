@@ -69,4 +69,4 @@ volumes:
   mongodbvol:
     driver: local
   rabbitvol:
-    driver: local/rabbitmq
+    driver: local
