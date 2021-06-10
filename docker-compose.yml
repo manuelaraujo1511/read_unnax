@@ -28,8 +28,21 @@ services:
       - 27017:27017
     networks:
       - sail
-
     restart: unless-stopped
+  
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: rabbitmq
+    ports:
+      - 5672:5672
+      - 15672:15672
+    restart: on-failure
+    volumes:
+      - rabbitvol:/var/lib/rabbitmq/
+      - rabbitvol:/var/log/rabbitmq
+    networks:
+      - sail
+
   celery:
     build: .
     command: celery -A read_unnax worker -l info
@@ -37,6 +50,7 @@ services:
       - .:/code
     depends_on:
       - mongodb
+      - rabbitmq
   
   celery-beat:
     build: .
@@ -44,7 +58,8 @@ services:
     volumes:
       - .:/code
     depends_on:
-      - mongodb      
+      - mongodb
+      - rabbitmq
 
 networks:
   sail:
@@ -53,3 +68,5 @@ networks:
 volumes:
   mongodbvol:
     driver: local
+  rabbitvol:
+    driver: local/rabbitmq
