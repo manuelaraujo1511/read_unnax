@@ -23,12 +23,15 @@
 
 # Peticiones al API
 - POST
-  - http://<hostname>:8000/read/
+  - `http://<hostname>:8000/read/`
   - cuerpo:
-    {
-      "username": "<username>",
-      "password": "<password>",
-      "code": "<code>"
-    }
+    ```json
+        {
+          "username": "<username>",
+          "password": "<password>",
+          "code": "<code>"
+        }
+    ```
+    
 - GET
-  - http://<hostname>:8000/read/<code>/
+  - `http://<hostname>:8000/read/<code>/`
