@@ -5,7 +5,7 @@ services:
     build: .
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
-      - ".:/code"
+      - .:/code
     ports:
       - "8000:8000"
     depends_on:
@@ -21,7 +21,7 @@ services:
       PGID: 1000
       MONGO_INITDB_DATABASE: ${MONGODB_DEFAULT_DB}
     volumes:
-      - ".:/data/db"
+      - .:/data/db
     ports:
       - "27017:27017"
     restart: unless-stopped
@@ -35,9 +35,9 @@ services:
       RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASSWORD}
     
       volumes:
-      - ".:/etc/rabbitmq/"
-      - ".:/var/lib/rabbitmq/"
-      - ".:/var/log/rabbitmq/"
+      - .:/etc/rabbitmq/
+      - .:/var/lib/rabbitmq/
+      - .:/var/log/rabbitmq/
     ports:
       - 5672:5672
       - 15672:15672
