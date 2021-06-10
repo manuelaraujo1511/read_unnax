@@ -20,3 +20,15 @@
 
 # Ejecucion del API REST
 ### Para la ejecucion del api se encuentra un archivo **.yml** que contiene la configuracion de docker-compose mediante el cual se levantaran los diferentes servicios
+
+# Peticiones al API
+- POST
+  - http://<hostname>:8000/read/
+  - cuerpo:
+    {
+      "username": "<username>",
+      "password": "<password>",
+      "code": "<code>"
+    }
+- GET
+  - http://<hostname>:8000/read/<code>/
