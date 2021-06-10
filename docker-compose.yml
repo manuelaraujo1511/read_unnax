@@ -29,24 +29,7 @@ services:
       - 27017:27017
     networks:
       - sail
-    restart: unless-stopped
-  
-  rabbit:
-    image: rabbitmq:3-management-alpine
-    container_name: rabbitmq
-    environment:
-      RABBITMQ_DEFAULT_USER: "guest"
-      RABBITMQ_DEFAULT_PASS: "guest"
-      RABBITMQ_DEFAULT_VHOST: "/"
-    ports:
-      - 5672:5672
-      - 15672:15672
-    restart: on-failure
-    volumes:
-      - rabbitvol:/var/lib/rabbitmq/
-      - rabbitvol:/var/log/rabbitmq
-    networks:
-      - sail
+    restart: unless-stopped 
 
   celery:
     build: .
@@ -55,7 +38,6 @@ services:
       - .:/code
     depends_on:
       - mongodb
-      - rabbit
   
   celery-beat:
     build: .
@@ -64,7 +46,6 @@ services:
       - .:/code
     depends_on:
       - mongodb
-      - rabbit
 
 networks:
   sail:
@@ -72,6 +53,4 @@ networks:
 
 volumes:
   mongodbvol:
-    driver: local
-  rabbitvol:
-    driver: local
+    driver: local  

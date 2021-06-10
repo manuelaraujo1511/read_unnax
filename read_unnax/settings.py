@@ -28,11 +28,10 @@ DEBUG = True
 ALLOWED_HOSTS = ['*', '3.129.247.63']
 HOST = '3.129.247.63'
 MONGODB_HOSTS= 'mongodb'
-RABBITMQ_HOSTS= 'rabbit'
-# in local amdin
-RABBITMQ_USER= 'guest'
-# in local 19200130
-RABBITMQ_PASS= 'guest'
+RABBITMQ_HOSTS= '3.129.247.63'
+RABBITMQ_USER= 'admin'
+RABBITMQ_PASS= '19200130'
+RABBITMQ_VHOST= '/my_vhost'
 # Application definition
 
 INSTALLED_APPS = [
@@ -51,7 +50,7 @@ CELERY_RESULT_BACKEND = 'django-db'
 CELERY_CACHE_BACKEND = 'django-cache'
 # CELERY_BROKER_URL = 'amqp://admin:19200130@3.129.247.63:5672//my_vhost'
 # CELERY_BROKER_URL = 'amqp://admin:19200130@%s:5672//my_vhost'%HOST
-CELERY_BROKER_URL = 'amqp://%s:%s@%s:5672//'%(RABBITMQ_USER, RABBITMQ_PASS, RABBITMQ_HOSTS)
+CELERY_BROKER_URL = 'amqp://%s:%s@%s:5672/%s'%(RABBITMQ_USER, RABBITMQ_PASS, RABBITMQ_HOSTS, RABBITMQ_VHOST)
 
 
 CELERY_ACCEPT_CONTENT = ['application/json']
