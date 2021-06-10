@@ -3,7 +3,7 @@ version: '3.2'
 services:
   api:
     build: .
-    command: python manage.py runserver 0.0.0.0:8000
+    command: python manage.py migrate --noinput && python manage.py runserver 0.0.0.0:8000
     ports:
       - 8000:8000
     volumes:
@@ -30,6 +30,21 @@ services:
       - sail
 
     restart: unless-stopped
+  celery:
+    build: .
+    command: celery -A proj worker -l info
+    volumes:
+      - .:/code
+    depends_on:
+      - mongodb
+  
+  celery-beat:
+    build: .
+    command: celery -A proj beat -l info
+    volumes:
+      - .:/code
+    depends_on:
+      - mongodb      
 
 networks:
   sail:
