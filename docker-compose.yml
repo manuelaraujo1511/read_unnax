@@ -50,6 +50,7 @@ services:
     command: celery -A read_unnax worker -l info
     volumes:
       - .:/code
+    ports: []
     networks:
       - sail
     depends_on:
@@ -60,6 +61,7 @@ services:
     build: .
     hostname: rabbitmq
     command: celery -A read_unnax beat -l info
+    ports: []
     volumes:
       - .:/code
     networks:
